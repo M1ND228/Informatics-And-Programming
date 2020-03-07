@@ -30,14 +30,14 @@ void mainMenu(Date& t1) {
 	}
 }
 
-void chooseMenu(Date& t1,Date& t2, Date& t3, int d, int m,int y) {
-	std::cout << 
-		"Действия с датой:\n" << 
-		"1 - Сложить две даты\n" << 
-		"2 - Вычесть две даты\n" << 
-		"3 - Сравнить две даты\n" << 
-		"4 - Проверка на высокостность\n" << 
-		"5 - Ввести другую дату\n" << 
+void chooseMenu(Date& t1, Date& t2, Date& t3, int d, int m, int y) {
+	std::cout <<
+		"\nДействия с датой:\n" <<
+		"1 - Сложить две даты\n" <<
+		"2 - Вычесть две даты\n" <<
+		"3 - Сравнить две даты\n" <<
+		"4 - Проверка на высокостность\n" <<
+		"5 - Ввести другую дату\n" <<
 		"Ввод: ";
 	int menu2 = 0;
 	std::cin >> menu2;
@@ -62,16 +62,10 @@ void chooseMenu(Date& t1,Date& t2, Date& t3, int d, int m,int y) {
 		system("cls");
 		std::cout << "Первая дата: ";
 		t1.print();
-		std::cout << "Введите вторую дату\n";
+		std::cout << "Вторая дата: ";
 		t2.input();
-		t3 = t2 - t1;
-		y = t3.Get_Y();
-		t3.Set_Y(y);
-		m = t3.Get_M();
-		t3.Set_M(m);
-		d = t3.Get_D();
-		t3.Set_D(d);
-		std::cout << "Вычитание равно = " << t3;
+		t3 = t1 - t2;
+		std::cout << "\nВычитание равно = " << t3 << std::endl;
 		break;
 	case 3:
 		system("cls");
@@ -84,13 +78,15 @@ void chooseMenu(Date& t1,Date& t2, Date& t3, int d, int m,int y) {
 		break;
 	case 4:
 		system("cls");
+		int year;
 		std::cout << "Первая дата: ";
 		t1.print();
-		if ((t1.Get_Y() % 4) || ((t1.Get_Y() % 100 == 0 && t1.Get_Y() % 400)))
+		year = t1.Get_Y();
+		if ((year % 4) || (year % 100 == 0 && year % 400))
 		{
-			std::cout << "Год является высокосным\n";
+			std::cout << "Год является невысокосным\n";
 		}
-		else { std::cout << "Год является невысокосным\n"; }
+		else { std::cout << "Год является высокосным\n"; }
 		break;
 	case 5:
 		system("cls");
@@ -108,7 +104,7 @@ void chooseMenu(Date& t1,Date& t2, Date& t3, int d, int m,int y) {
 int main() {
 	setlocale(LC_ALL, "rus");
 	system("cls");
-	
+
 	int d = 9, m = 11, y = 2001;
 
 	Date t1;
@@ -119,7 +115,7 @@ int main() {
 	std::cout << "Тест конструкторов" << std::endl;
 	std::cout << "Конструктор по умолчанию: " << Date();
 	std::cout << "\nКонструктор с параметрами: " << Date(d, m, y);
-	Date t4(11,11,2112);
+	Date t4(11, 11, 2112);
 	std::cout << "\nКонструктор копирования: " << Date(t4);
 	std::cout << "\nДиструктор: ";
 	present.~Date();
@@ -127,17 +123,20 @@ int main() {
 
 	std::cout << "\nТест функционала" << std::endl;
 	Date c1(1, 1, 2000), c2(9, 9, 2005);
+	std::cout << "Первая дата - " << c1 << std::endl;
+	std::cout << "Вторая дата - " << c2 << std::endl;
 	std::cout << "Сложение двух дат " << c1 + c2;
 	std::cout << "\nВычитание даты из даты " << c2 - c1;
 	std::cout << "\nСравнение двух дат ";
 	if (c1 == c2) {
 		std::cout << "\nДаты ровны " << c1 << " = " << c2;
-	} else { std::cout << "\nДаты не ровны " << c1 << " != " << c2; }
+	}
+	else { std::cout << "\nДаты не ровны " << c1 << " != " << c2; }
 
 	mainMenu(t1);
-	chooseMenu(t1,t2,t3,d,m,y);
+	chooseMenu(t1, t2, t3, d, m, y);
 
 
 	std::cout << "\n";
- 	system("pause");
+	system("pause");
 }
