@@ -39,7 +39,7 @@ void waitingInput()
 	while (!_kbhit()) {}
 }
 
-void mainMenu(Dictionary d1)
+void mainMenu(Dictionary& d1)
 {
 	system("cls");
 	int choose = 0;
@@ -71,7 +71,6 @@ void mainMenu(Dictionary d1)
 		int words;
 		words = checkInput(0, 100);
 		d1.add(words);
-		cout << "Словарь обновлён";
 		Sleep(800);
 		mainMenu(d1);
 		break;
@@ -147,7 +146,7 @@ int main() {
 	}
 
 	Dictionary d1,d2,d3;
-
+	
 	cout << "Тест конструкторов\n";
 	cout << "Конструктор по умолчанию: " << Dictionary();
 	std::cout << "\nКонструктор с параметрами: \n" << Dictionary(test,test2,50,change);
@@ -170,6 +169,11 @@ int main() {
 	d3 = d1;
 
 	cout << d3;
+	
+	Dictionary d5;
+	cin >> d5;
+	cout << "Результат ввода с клавиатуры\n";
+	d5.print();
 
 	system("pause");
 	
