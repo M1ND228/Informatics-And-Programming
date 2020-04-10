@@ -25,6 +25,7 @@ public:
 	Dictionary& operator = (const Dictionary& c);
 	Dictionary  operator + (const Dictionary& c);
 
+	friend std::istream& operator >> (std::istream& stream,  Dictionary& c);
 	friend std::ostream& operator << (std::ostream& stream, const Dictionary& c);
 
 private:
