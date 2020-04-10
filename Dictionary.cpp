@@ -8,7 +8,7 @@
 using namespace std;
 
 Dictionary::Dictionary() {
-	size = 15000;				// Up to 15,000 words
+	size = 80000;				// Up to 80 000 words
 	lastChange = 0;
     en = new string[size];
 	ru = new string[size];
@@ -47,7 +47,9 @@ Dictionary::~Dictionary() {
 int Dictionary::Get_lastChange() { return lastChange; }
 
 void Dictionary::add(int words) {
+	bool sys = true;
 	for (int i = 0; i < words; i++) {
+		if (lastChange >= size) { cout << "Словарь переполнен.\n"; Sleep(1000); sys = false; break; }
 		cout << "Введите слово на Английском\nВвод:";
 		cin >> en[lastChange];
 		system("cls");
@@ -56,6 +58,7 @@ void Dictionary::add(int words) {
 		lastChange++;
 	}
 	system("cls");
+	if(sys){ cout << "Словарь обновлён"; }
 }
 
 void Dictionary::print() {
@@ -148,15 +151,17 @@ int Dictionary::inputFile() {
 	ifstream F;
 	F.open("C:\\Users\\DIMA\\Desktop\\input.txt", ios::in);
 	int i = lastChange;
-	
+	bool sys = true;
 	while (!F.eof())
 	{
+		if (lastChange >= size) { cout << "Словарь переполнен.\n"; Sleep(1000); sys = false; break; }
 		F >> en[i] >> ru[i];
 		lastChange++;
 		i++;
 	}
 	F.close();
-	cout << "Данные успешно прочтены\n";
+	if (sys) { cout << "Данные успешно прочтены\n"; }
+	
 	
 	return 1;
 }
@@ -198,5 +203,15 @@ std::ostream& operator << (std::ostream& stream, const Dictionary& c) {
 			stream << c.ru[i] << "\n";
 		}
 	}
+	return stream;
+}
+
+std::istream& operator >> (std::istream& stream, Dictionary& c) {
+		cout << "Введите слово на Английском\nВвод:";
+		cin >> c.en[c.lastChange];
+		cout << "Введите перевод слова " << c.en[c.lastChange] << "\t";
+		cin >> c.ru[c.lastChange];
+		c.lastChange++;
+	
 	return stream;
 }
