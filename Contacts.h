@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>;
+
 using namespace std;
 
 class Contacts
@@ -30,15 +31,15 @@ public:
 	string Get_phone();
 	bool   Get_favorit();
 
-	Contacts add();
+	Contacts add();				
 
 private:
-	string name;			// Имя
-	string surname;			// Фамилия
-	string midName;			// Отчество
-	int day;
-	int month;
-	int year;
+	string name;			// Name
+	string surname;			// Surname
+	string midName;			// Middle name
+	int day;				// Date of birth
+	int month;				// Date of birth
+	int year;				// Date of birth
 	string phone;
 	bool favorit;
 };
