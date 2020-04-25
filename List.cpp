@@ -11,7 +11,8 @@ List::List() {
 }
 
 List::~List() {
-
+	count = 0;
+	delete[] list;
 }
 
 int List::Get_count() { return this->count; }
@@ -23,8 +24,10 @@ void List::newElement(int num) {
 		count++;
 		system("cls");
 	}
-	cout << "Контактная база обнавлена\n";
 	sortContacts();
+	cout << "Контактная база обнавлена\n\n";
+	(void)getchar();
+
 }
 
 void List::changeContact() {
@@ -33,6 +36,7 @@ void List::changeContact() {
 	int day_, month_, year_;
 	string phone;
 	int choose;
+	bool find = false;
 	cout << "Введите ФИО для поиска: ";
 	cin >> s1;
 	cin >> n1;
@@ -41,6 +45,7 @@ void List::changeContact() {
 	{
 		if (s1 == list[i].Get_surname() && n1 == list[i].Get_name() && m1 == list[i].Get_midName())
 		{
+			find = true;
 			cout << "Контакт был найден:\n";
 			cout << "ФИО: " << list[i].Get_surname().c_str() << " " << list[i].Get_name().c_str() << " " << list[i].Get_midName().c_str() << "\n";
 			cout << "День рождение: " << list[i].Get_day() << " " << list[i].Get_month() << " " << list[i].Get_year() << "\n";
@@ -71,7 +76,7 @@ void List::changeContact() {
 				cin >> str3;
 				list[i].Set_midName(str3);
 				cout << "Данные успешно изменены...\n";
-				getchar(); getchar();
+				(void)getchar(); (void)getchar();
 				break;
 			case 2:
 				system("cls");
@@ -85,7 +90,7 @@ void List::changeContact() {
 				cin >> year_;
 				list[i].Set_year(year_);
 				cout << "Данные успешно изменены...\n";
-				getchar(); getchar();
+				(void)getchar(); (void)getchar();
 				break;
 			case 3:
 				system("cls");
@@ -93,12 +98,12 @@ void List::changeContact() {
 				cin >> phone;
 				list[i].Set_phone(phone);
 				cout << "Данные успешно изменены...\n";
-				getchar(); getchar();
+				(void)getchar(); (void)getchar();
 				break;
 			case 4:
 				system("cls");
-				if (list[i].Get_favorit()) { list[i].Set_favorit(false); cout << "Контакт изменён на не избранный\n"; getchar(); getchar(); }
-				else { list[i].Set_favorit(true);  cout << "Контакт изменён на избранный\n"; getchar(); getchar(); }
+				if (list[i].Get_favorit()) { list[i].Set_favorit(false); cout << "Контакт изменён на не избранный\n"; (void)getchar(); (void)getchar(); }
+				else { list[i].Set_favorit(true);  cout << "Контакт изменён на избранный\n"; (void)getchar(); (void)getchar(); }
 				break;
 			case 0:
 				break;
@@ -110,7 +115,7 @@ void List::changeContact() {
 			}
 		}
 	}
-
+	if (find == false) { cout << "Контакт не был найден.\n\n"; (void)getchar(); (void)getchar(); }
 }
 
 void List::sortContacts() {
@@ -158,18 +163,22 @@ void List::sortContacts() {
 }
 
 void List::print() {
-	cout << "Контактов: " << count << "\n";
-	cout << "Список контактов:\n";
-	sortContacts();
-	for (int i = 0; i < count; i++)
-	{
-		cout << i + 1 << ") " << list[i].Get_surname() << " " << list[i].Get_name() << " " << list[i].Get_midName() << ".\n";
+	if (count < 1) { cout << "База контактов пуста\n"; }
+	else {
+		cout << "Контактов: " << count << "\n";
+		cout << "Список контактов:\n";
+		sortContacts();
+		for (int i = 0; i < count; i++)
+		{
+			cout << i + 1 << ") " << list[i].Get_surname() << " " << list[i].Get_name() << " " << list[i].Get_midName() << ".\n";
+		}
 	}
 }
 
 void List::printFavorit() {
 	cout << "Избранные контакты: \n";
 	int j = 0;
+	bool find = false;
 	sortContacts();
 	for (int i = 0; i < count; i++)
 	{
@@ -177,12 +186,15 @@ void List::printFavorit() {
 		{
 			j++;
 			cout << j << ") " << list[i].Get_surname() << " " << list[i].Get_name() << " " << list[i].Get_midName() << ".\n";
+			find = true;
 		}
 	}
+	if (find == false) { cout << "Список избранных контактов пуст\n"; (void)getchar(); (void)getchar(); }
 }
 
 void List::findSNM() {
 	string s1, n1, m1;
+	bool find = false;
 	cout << "Введите ФИО для поиска: ";
 	cin >> s1;
 	cin >> n1;
@@ -197,14 +209,16 @@ void List::findSNM() {
 			cout << "Телефон: " << list[i].Get_phone().c_str() << "\n";
 			if (list[i].Get_favorit()) { cout << "Избранный: Да\n\n"; }
 			else { cout << "Избранный: Нет\n\n"; }
-
+			bool find = false;
 		}
 	}
+	if (find == false) { cout << "Совпадений не найдено\n"; (void)getchar(); (void)getchar(); }
 }
 
 void List::findFirstChar() {
 	string s1;
 	string s2;
+	bool find = false;
 	cout << "Введите букву для поиска: \nВвод: ";
 	cin >> s1;
 	cout << "\n";
@@ -218,8 +232,10 @@ void List::findFirstChar() {
 			cout << "Телефон: " << list[i].Get_phone().c_str() << "\n";
 			if (list[i].Get_favorit()) { cout << "Избранный: Да\n\n"; }
 			else { cout << "Избранный: Нет\n\n"; }
+			bool find = true;
 		}
 	}
+	if (find == false) { cout << "Контактов не найдено\n\n"; (void)getchar(); (void)getchar(); }
 }
 
 void List::addFavorit() {
@@ -228,6 +244,7 @@ void List::addFavorit() {
 	cin >> s1;
 	cin >> n1;
 	cin >> m1;
+	bool find = false;
 	for (int i = 0; i < count; i++)
 	{
 		if (s1 == list[i].Get_surname() && n1 == list[i].Get_name() && m1 == list[i].Get_midName() )
@@ -236,8 +253,10 @@ void List::addFavorit() {
 			cout << "ФИО: " << list[i].Get_surname().c_str() << " " << list[i].Get_name().c_str() << " " << list[i].Get_midName().c_str() << "\n";
 			if (list[i].Get_favorit()) { cout << "Контакт находится в избранных\n\n"; }
 			else { list[i].Set_favorit(true); cout << "Контакт был добавлен в избранные\n\n"; }
+			find = true;
 		}
 	}
+	if (find == false) { cout << "Контакт не был найден\n"; (void)getchar(); (void)getchar(); }
 }
 
 int List::outputFile() {
@@ -258,6 +277,7 @@ int List::outputFile() {
 			if (list[i].Get_favorit()) { fprintf(file, "Избранный: Да\n\n"); }
 			else { fprintf(file, "Избранный: Нет\n\n"); }
 		}
+		cout << "Данные успешно записанны в файл\n\n";
 	}
 	fclose(file);
 	return 1;
@@ -295,6 +315,8 @@ int List::inputFile() {
 	}
 	F.close();
 	sortContacts();
+	cout << "Даннные успешно прочтены\n";
+	(void)getchar(); (void)getchar();
 	return 1;
 }
 
@@ -309,20 +331,21 @@ void List::delFavorit() {
 	cin >> s1;
 	cin >> n1;
 	cin >> m1;
+	bool search = false;
 	for (int i = 0; i < count; i++)
 	{
 		if (s1 == list[i].Get_surname() && n1 == list[i].Get_name() && m1 == list[i].Get_midName())
 		{
 			if (list[i].Get_favorit() == true)
 			{
+				search = true;
 				cout << "Контакт: " << list[i].Get_surname() << " " << list[i].Get_name() << " " << list[i].Get_midName() << " - был удалён из избранных.\n";
 				list[i].Set_favorit(false);
 			}
-			else { cout << "Контакт был найден,но он находится не в избранных."; }
+			else { cout << "Контакт был найден,но он находится не в избранных.\n"; }
 		}
-		else { cout << "Такого контакта не существует"; }
 	}
-
+	if (false == false) { cout << "Контакт не был найден.\n"; (void)getchar(); (void)getchar(); }
 }
 
 void List::findPhone() {
