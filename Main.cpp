@@ -23,7 +23,7 @@ void mainMenu(List& l1)
 	cout << "|12 - Прочитать контакты с файла	        |\n";
 	cout << "|13 - Вывести список контактов в файл           |\n";
 	cout << "|- - - - - - - - - - - - - - - - - - - - - - - -|\n";
-	cout << "|0 - Выход из приложения			|\n";
+	cout << "|0  - Выход из приложения		        |\n";
 	cout << "|- - - - - - - - - - - - - - - - - - - - - - - -|\n\n";
 	cout << "Ввод: ";
 	cin >> choose;
@@ -46,7 +46,7 @@ void mainMenu(List& l1)
 	case 3:
 		system("cls");
 		l1.changeContact();
-		getchar(); getchar();
+
 		mainMenu(l1);
 	case 4:
 		system("cls");
