@@ -78,6 +78,7 @@ Contacts Contacts::add() {
 	
 }
 
+// SETTERI
 void Contacts::Set_name(string name_) { name = name_; }
 
 void Contacts::Set_surname(string surname_) { surname = surname_; }
@@ -93,6 +94,8 @@ void Contacts::Set_year(int year_) { year = year_; }
 void Contacts::Set_phone(string phone_) { phone = phone_; }
 
 void Contacts::Set_favorit(bool favorit_) { favorit = favorit_; }
+
+// GETTERI
 
 string Contacts::Get_name() { return this->name; }
 
