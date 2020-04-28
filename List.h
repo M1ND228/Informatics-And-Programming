@@ -1,14 +1,20 @@
 #pragma once
-#include "Contacts.h"
+#include "Contacts.h";
 
 class List : public Contacts
 {
 public:
 	List();
+	List(int count_, int memory_, Contacts* list_);
+	List(const List& c);
 
 	~List();
 
 	int Get_count();
+
+	string input_char();								// Vvod 1 cimBola 
+	string input_phone();								// Vvod dlya poiska po Telefony
+	string input_FIO();									// Vvod dlya poiska po fio
 
 	void sortContacts();								// Alphabetical sorting
 	void newElement(int num);							// Add new Contact
@@ -28,6 +34,7 @@ public:
 	int inputFile();
 
 private:
-	int count;
-	Contacts *list;
+	int count;											// Kolichestvo contactov
+	int memory;											// Ckolko Bideleno Pamyati
+	Contacts *list;										
 };
