@@ -5,13 +5,13 @@
 using namespace std;
 
 Contacts::Contacts() {
-	name = "1";
-	surname = "1";
-	midName = "1";
-	day = 1;
-	month = 1;
-	year = 2000;
-	phone = "+7";
+	name = "";
+	surname = "";
+	midName = "";
+	day = 0;
+	month = 0;
+	year = 0;
+	phone = "";
 	favorit = false;
 }
 
