@@ -135,8 +135,8 @@ void mainMenu(List& l1)
 }
 
 int main() {
-	SetConsoleCP(1251);				// установка кодовой страницы win-cp 1251 в поток ввода
-	SetConsoleOutputCP(1251);		// установка кодовой страницы win-cp 1251 в поток вывода
+	SetConsoleCP(1251);				
+	SetConsoleOutputCP(1251);		
 	system("cls");
 
 	List l1;
