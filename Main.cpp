@@ -17,13 +17,14 @@ void mainMenu(Bank& c1) {
 	cout << "5 - Сменить аккаунт\n";
 	cout << "6 - Зарегестрировать аккаунт\n";
 	cout << "7 - Аккаунтов в базе\n";
-	cout << "- - - - - - - - - - \n";
+	cout << "- - - - - - - - - - - - \n";
 	cout << "0 - Выход из приложения\n> ";
 	int choose;
 	cin >> choose;
 	switch (choose)
 	{
 	case 0 :
+		cout << "Спасибо за использование нашего банка!\n";
 		Sleep(1000);
 		exit(EXIT_SUCCESS);
 		break;
@@ -64,36 +65,10 @@ void mainMenu(Bank& c1) {
 		break;
 	default:
 		system("cls");
-		cout << "Кажется вы ввели что-то не то\n";
+		cout << "Кажется вы ввели что-то не то...\n";
 		Sleep(800);
 		system("cls");
 		mainMenu(c1);
-		break;
-	}
-}
-
-void signIn(Bank& c1) {
-	cout << "1 - Войти в аккаунт\n";
-	cout << "2 - Зарегестрироваться\n> ";
-	int choose;
-	cin >> choose;
-	switch (choose)
-	{
-	case 1:
-		c1.logAccount();
-		mainMenu(c1);
-		break;
-	case 2:
-		c1.registration();
-		Sleep(1000);
-		c1.logAccount();
-		mainMenu(c1);
-		break;
-	default:
-		cout << "Кажется вы ввели что-то не то\n";
-		Sleep(800);
-		system("cls");
-		signIn(c1);
 		break;
 	}
 }
