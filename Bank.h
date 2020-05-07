@@ -9,30 +9,30 @@ class Bank
 {
 public:
 	Bank();
-	Bank(int count_, int position_, Credit* list_credit_, ProcCenter* list_user_);
+	Bank(int memory_,int count_, int position_, Credit* list_credit_, ProcCenter* list_user_);
 	Bank(const Bank& c);
 
 	~Bank();
 
 	//		 INPUT			
-	string makeLoan();
 	string signInPas();
 	int signInChet();
 
 	//		Function		
-	void infoCredit();				// Информация по кредиту
-	void registration();			// Регестрация
-	void logAccount();				// Вход в аккаунт
-	void takeCredit();				// Oformit credit
-	void one_pay();					// Ежемесячный платёж
-	void payOff();					// Погасить всю сумму
-	void inputCount();				// Количество аккаунтов
+	void infoCredit();				// Information on the loan
+	void registration();			// Registration of user
+	void logAccount();				// Log in to your account
+	void takeCredit();				// Credit registration
+	void one_pay();					// Monthly payment
+	void payOff();					// Pay off the entire amount
+	void inputCount();				// Number of accounts
 
 	Bank& operator = (const Bank& c);
 
 private:
-	int count;						// количество аккаунтов
-	int position;					// для входа в аккаунт
-	Credit* list_credit;
-	ProcCenter* list_user;
+	int memory;						// Memory monitoring	
+	int count;						// Number of accounts
+	int position;					// To log in to your account
+	Credit* list_credit;			// List of loans taken
+	ProcCenter* list_user;			// List of registered accounts
 };
