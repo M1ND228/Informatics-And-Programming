@@ -10,15 +10,17 @@ using namespace std;
 Bank::Bank() {
 	count = 0;
 	position = -1;
-	list_credit = new Credit[100];
-	list_user = new ProcCenter[100];
+	memory = 1;
+	list_credit = new Credit[memory];
+	list_user = new ProcCenter[memory];
 }
 
-Bank::Bank(int count_, int position_, Credit* list_credit_, ProcCenter* list_user_) {
+Bank::Bank(int memory_,int count_, int position_, Credit* list_credit_, ProcCenter* list_user_) {
 	count = count_;
 	position = position_;
-	list_credit = new Credit[100];
-	list_user = new ProcCenter[100];
+	memory = memory_;
+	list_credit = new Credit[memory];
+	list_user = new ProcCenter[memory];
 	for (int i = 0; i < count; i++)
 	{
 		list_credit[i] = list_credit_[i];
@@ -29,8 +31,9 @@ Bank::Bank(int count_, int position_, Credit* list_credit_, ProcCenter* list_use
 Bank::Bank(const Bank& c) {
 	count = c.count;
 	position = c.position;
-	list_credit = new Credit[100];
-	list_user = new ProcCenter[100];
+	memory = c.memory;
+	list_credit = new Credit[memory];
+	list_user = new ProcCenter[memory];
 	for (int i = 0; i < count; i++) 
 	{
 		list_credit[i] = c.list_credit[i];
@@ -43,12 +46,6 @@ Bank::~Bank() {
 	position = 0;
 	delete[] list_credit;
 	delete[] list_user;
-}
-
-string Bank::makeLoan() {
-	string str;
-
-	return str;
 }
 
 string Bank::signInPas() {
@@ -72,6 +69,22 @@ int Bank::signInChet() {
 
 
 void Bank::registration() {
+	if (count + 1 > memory)
+	{
+		ProcCenter* new_list_user = new ProcCenter[count + 1];
+		for (int i = 0; i < count; i++)
+		{
+			new_list_user[i] = list_user[i];
+		}
+		delete[]list_user;
+		list_user = new ProcCenter[count + 1];
+		for (int i = 0; i < count; i++)
+		{
+			list_user[i] = new_list_user[i];
+		}
+		memory++;
+		delete[] new_list_user;
+	}
 	ProcCenter a1;
 	a1.createAccount();
 	list_user[count] = a1;
@@ -109,6 +122,22 @@ void Bank::logAccount() {
 }
 
 void Bank::takeCredit() {
+	if (count + 1 > memory)
+	{
+		Credit* new_list_credit = new Credit[count + 1];
+		for (int i = 0; i < count; i++)
+		{
+			new_list_credit[i] = list_credit[i];
+		}
+		delete[]list_credit;
+		list_credit = new Credit[count + 1];
+		for (int i = 0; i < count; i++)
+		{
+			list_credit[i] = new_list_credit[i];
+		}
+		memory++;
+		delete[] new_list_credit;
+	}
 	if (position < 0) { cout << "Войдите в аккаунт\n"; }
 	else {
 		if (list_credit[position].Get_amount() > 0) { cout << "Прошлый кредит не погашен\n"; }
