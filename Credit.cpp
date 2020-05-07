@@ -44,6 +44,7 @@ Credit::~Credit() {
 	amount = 0;
 	percent = 0;
 	salaryAccount = 0;
+	payMonth = 0;
 }
 
 int Credit::inputMoney() {
@@ -54,7 +55,8 @@ int Credit::inputMoney() {
 		cin >> tmp;
 		cout << "\n";
 	} while (tmp < 0 || tmp > 2000000000);
-	money = tmp;
+	money = (int)tmp;
+
 	return money;
 }
 
@@ -99,12 +101,14 @@ int Credit::inputYear() {
 }
 
 int Credit::corectInput(int min, int max) {
-	int money;
+	int money = 0;
+	unsigned long long int tmp;
 	do {
 		cout << "Сумма: ";
-		cin >> money;
+		cin >> tmp;
 		cout << "\n";
-	} while (money < min || money > max);
+	} while (tmp < min || tmp > max);
+	money = (int)tmp;
 
 	return money;
 }
@@ -138,6 +142,8 @@ int Credit::inputAmount(int year) {
 		percent = PROCENT - int(year / 3) - 4;
 		break;
 	default:
+		cout << "Кажется вы ошиблись...\n";
+		Sleep(800);
 		break;
 	}
 
@@ -150,6 +156,7 @@ Credit Credit::createCredit() {
 	salaryAccount = inputMoney();
 	year = inputYear();
 	amount = inputAmount(year);
+	if (amount == 0) { return res; }
 	amount = amount + ((amount / 100)*percent);
 	percent = percent;
 	payMonth = (amount + (percent * (amount / 100))) / ((12 * year));
