@@ -28,11 +28,11 @@ public:
 	string input_FIO();
 	string input_password();
 
-	ProcCenter createAccount();
+	ProcCenter createAccount();		// Creating an account
 
 private:
-	int code;
-	string password;
+	int code;						// ID users
+	string password;				// Password
 	string name;					// Name
 	string surname;					// Surname
 	string midName;					// Middle name 
