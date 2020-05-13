@@ -71,6 +71,7 @@ string ProcCenter::input_FIO() {
 string ProcCenter::input_password() {
 	string pas; 
 	string tmp, tmp2;
+	int counter = 0;
 	bool check = false;
 	do {
 		cout << "Введите пароль для входа в аккаунт: ";
@@ -82,7 +83,7 @@ string ProcCenter::input_password() {
 		{ 
 			cout << "Повторите введённый пароль: "; 
 			cin >> tmp2; 
-			if (tmp != tmp2) { cout << "Пароли не совпадают\n"; }
+			if (tmp != tmp2) { cout << "Пароли не совпадают\n"; counter++; }
 			else { cout << "Пароль успешно сохранён!\n"; pas = tmp; check = true; }
 		}
 	} while (check == false);
