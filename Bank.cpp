@@ -2,6 +2,7 @@
 #include "Bank.h"
 #include <iostream>
 #include <windows.h>
+#include <omp.h>
 #include <string>
 
 
@@ -10,7 +11,7 @@ using namespace std;
 Bank::Bank() {
 	count = 0;
 	position = -1;
-	memory = 1;
+	memory = 250;
 	list_credit = new Credit[memory];
 	list_user = new ProcCenter[memory];
 }
@@ -46,6 +47,33 @@ Bank::~Bank() {
 	position = 0;
 	delete[] list_credit;
 	delete[] list_user;
+}
+
+void Bank::timer() {
+	int stop = 30;
+	for(int i = 0; i < 30; i++)
+	{
+		system("cls");
+		cout << "Ваша карта заблокированна: " << stop - i << " сек.";
+		Sleep(950);
+	}
+	system("cls");
+}
+
+string Bank::controlInputPas(int i) {
+	string pas;
+	cout << "Пароль введён неверно\n";
+	for (int j = 0; j < 3; j++)
+	{
+		if (j == 2) { timer(); return pas; }
+		pas = signInPas();
+		if (list_user[i].Get_password() == pas)
+		{
+			return pas;
+		}
+		else { cout << "Пароль введён неверно\n"; }
+	}
+	return pas;
 }
 
 string Bank::signInPas() {
@@ -117,11 +145,27 @@ void Bank::logAccount() {
 			cout << "Вход в аккаунт...\n";
 			Sleep(700);
 		}
+		else
+		{
+			if (schet == list_user[i].Get_code() && list_user[i].Get_password() != pas)
+			{
+				pas = controlInputPas(i);
+				if (list_user[i].Get_password() == pas)
+				{
+					position = i;
+					check = true;
+					cout << "Вход в аккаунт...\n";
+					Sleep(700);
+					break;
+				}
+			}
+		}
+		if (check == false) { cout << "Аккаунт не найден\n"; }
 	}
-	if (check == false) { cout << "Аккаунт не найден\n"; }
 }
 
 void Bank::takeCredit() {
+	string pas,tru;
 	if (count + 1 > memory)
 	{
 		Credit* new_list_credit = new Credit[count + 1];
@@ -145,6 +189,26 @@ void Bank::takeCredit() {
 		{
 			Credit c1;
 			c1.createCredit();
+			if (c1.Get_amount() > 1)
+			{
+				pas = signInPas();
+				tru = list_user[position].Get_password();
+				if (pas != tru)
+				{
+					pas = controlInputPas(position);
+					if (pas == tru)
+					{
+						cout << "Кредит успешно оформлен\n";
+						int tmp = c1.Get_salaryAccount() + c1.Get_amount();
+						c1.Set_salaryAccount(tmp);
+					}
+				}else 
+				{
+					cout << "Кредит успешно оформлен\n";
+					int tmp = c1.Get_salaryAccount() + c1.Get_amount();
+					c1.Set_salaryAccount(tmp);
+				}
+			}
 			list_credit[position] = c1;
 			c1.~Credit();
 		}

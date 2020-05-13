@@ -26,6 +26,8 @@ public:
 	void one_pay();					// Monthly payment
 	void payOff();					// Pay off the entire amount
 	void inputCount();				// Number of accounts
+	string controlInputPas(int i);
+	void timer();
 
 	Bank& operator = (const Bank& c);
 
