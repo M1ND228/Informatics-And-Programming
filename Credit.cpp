@@ -1,4 +1,6 @@
 #include "Credit.h"
+#include "Bank.h"
+#include "ProcCenter.h"
 #include <iostream>
 #include <windows.h>
 #include <string>
@@ -161,9 +163,7 @@ Credit Credit::createCredit() {
 	percent = percent;
 	payMonth = (amount + (percent * (amount / 100))) / ((12 * year));
 	if (payMonth * 6 <= salaryAccount)
-	{
-		cout << "Кредит успешно оформлен\n";
-		salaryAccount += amount;
+	{ 
 	}
 	else
 	{
@@ -173,7 +173,7 @@ Credit Credit::createCredit() {
 		percent = 0;
 		(void)getchar(); (void)getchar();
 	}
-	
+	res.~Credit();
 	return *this;
 }
 
