@@ -8,9 +8,9 @@ public:
 
 	~Snake();
 
-	void draw();
-	void input();
-	void logic();
+	void draw();										// Otrisovka all
+	void input();										// BBod c keyboard 
+	void logic();										// Logic frukt, snake, polya, score
 
 	void PLAY();										// START GAME!!!
 	void Restart();										// Inicialization poly class posle ~ clasa
@@ -22,8 +22,8 @@ private:
 	int fruitX, fruitY;									// Koordinati frukt
 	int tailX[100], tailY[100];							// Koordinati XBOST
 	int nTail;											// count XBost
-	int width;											// Shirina
-	int height;											// Bisota	
+	int width;											// Shirina polya
+	int height;											// Bisota polya	
 	int score;											// Schet
-	eDir dir;
+	eDir dir;											// Napravlenie dvigeniya
 };
