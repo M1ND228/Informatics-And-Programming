@@ -222,7 +222,7 @@ void Snake::logic() {
         score += 10;
         fruitX = 1 + rand() % width - 2;
         fruitY = 1 + rand() % height - 1;
-        if (fruitX < 0 || fruitY < 0)
+        while (fruitX < 0 || fruitY < 0)
         {
             fruitX = 1 + rand() % width - 2;
             fruitY = 1 + rand() % height - 1;
